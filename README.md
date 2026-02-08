@@ -19,7 +19,7 @@ This ServiceNow utility detects "Zombie Servers"—infrastructure that is powere
 
 ### 1. The ROI Dashboard
 **Value Delivered:** Identifying €200/month in potential savings.
-![Zombie CI Report](img/Zombie_CI_Report.png)
+![Zombie CI Report](images/Zombie_CI_Report.png)
 
 ### 2. The "Brain" (Flow Designer)
 **Logic:** Automated flagging of servers with < 25 active connections.
