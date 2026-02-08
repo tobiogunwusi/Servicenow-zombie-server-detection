@@ -15,9 +15,19 @@ This ServiceNow utility detects "Zombie Servers"—infrastructure that is powere
 3.  Import XML -> Preview -> Commit.
 4.  Run Discovery on a Windows Server to see the `active_connections` field populate.
 
-## 📸 Screenshots
-![Dashboard](images/dashboard_screenshot.png)
-*Dashboard showing potential savings.*
+## 📸 Project Screenshots
+
+### 1. The ROI Dashboard
+**Value Delivered:** Identifying €200/month in potential savings.
+![Zombie Savings Dashboard](images/Zombie CI Report.png)
+
+### 2. The "Brain" (Flow Designer)
+**Logic:** Automated flagging of servers with < 25 active connections.
+![Flow Designer Logic](images/your_flow_filename.png)
+
+### 3. The "Eyes" (Pattern Designer)
+**Mechanism:** Custom PowerShell execution via MID Server.
+![PowerShell Pattern](images/your_pattern_filename.png)
 
 ## 🔗 Context
 Built as a Proof of Concept inspired by the **Berlin ServiceNow Developer Meetup** discussions on Hybrid Infrastructure Governance.
