@@ -4,11 +4,53 @@
 
 This ServiceNow utility detects "Zombie Servers"—infrastructure that is powered on and reachable (responding to Discovery) but has **zero active user connections**.
 
-## 🚀 Features
-* **Custom Pattern Extension:** Uses `PowerShell` to query `Get-NetTCPConnection` directly on the host.
-* **Flow Designer Logic:** Automatically flags servers as `Zombie Candidates` if connections drop below a defined threshold.
-* **ROI Dashboard:** Calculates potential monthly savings based on decommission targets.
+---
 
+## 🧠 Problem Statement
+
+Traditional ServiceNow Discovery marks servers as "Alive" if they respond to basic probes—even if they have **zero active users**. In a hybrid infrastructure, these idle servers are "Silent Killers" of the IT budget. They consume:
+
+* **Compute Resources** (CPU/RAM)
+* **Software Licenses** (Windows Server, SQL, etc.)
+* **Operational Overhead** (Patching, Backup, Monitoring)
+
+These are called **"Zombie Servers"** — infrastructure that is technically *up* but providing *zero business value*.
+
+**The Solution:** 🚀
+This project implements a **Custom Governance Workflow** to:
+1.  **Interrogate** the OS for active TCP user sessions (using PowerShell).
+2.  **Enrich** the CMDB with "Real-Time Utilization" metrics.
+3.  **Automate** the classification of "Zombie Candidates."
+4.  **Visualize** the financial impact ($) of idle assets.
+
+---
+
+## 🛠️ Architecture Overview
+
+| Component | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Discovery Pattern** | PowerShell / WMI | Injects custom command to count `ESTABLISHED` TCP connections. |
+| **CMDB Extension** | Dictionary Override | Extends `cmdb_ci_win_server` to store utilization metrics. |
+| **Flow Designer** | Flow Logic | Evaluates data post-discovery and flags "Zombie Candidates". |
+| **Analytics** | Reporting Engine | Calculates potential monthly savings based on decommission targets. |
+
+---
+
+## 📌 CMDB Schema Extensions
+
+Added to the **Windows Server** table (`cmdb_ci_win_server`):
+
+| Field Name | Type | Purpose |
+| :--- | :--- | :--- |
+| `u_active_connections` | Integer | Stores the count of active TCP sessions found during Discovery. |
+| `u_is_zombie_candidate` | Boolean | **True** if connections < Threshold. Triggers review workflow. |
+| `u_est_monthly_cost` | Currency | Estimated operational cost (Default: €200). Used for ROI calculation. |
+
+---
+
+## 🧪 Discovery Pattern Extension
+
+The solution extends the standard **Windows OS - Servers** pattern.
 ## 🛠️ Installation
 1.  Download the XML file from this repository.
 2.  In ServiceNow, navigate to **Retrieved Update Sets**.
@@ -37,4 +79,4 @@ This ServiceNow utility detects "Zombie Servers"—infrastructure that is powere
 
 ## 🔗 Context
 **The Challenge:** Standard ServiceNow Discovery identifies infrastructure *existence*, but often lacks the granularity to determine *business utility*.
-**The Solution:** This project bridges that gap by introducing OS-level session analysis to identify "Zombie Servers"—infrastructure that is technically "up" but providing zero business value.
+This project bridges that gap by introducing OS-level session analysis to identify "Zombie Servers"—infrastructure that is technically "up" but providing zero business value— directly eliminating unnecessary operational costs.
