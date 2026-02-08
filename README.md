@@ -44,7 +44,7 @@ Added to the **Windows Server** table (`cmdb_ci_win_server`):
 | :--- | :--- | :--- |
 | `u_active_connections` | Integer | Stores the count of active TCP sessions found during Discovery. |
 | `u_is_zombie_candidate` | Boolean | **True** if connections < Threshold. Triggers review workflow. |
-| `u_est_monthly_cost` | Currency | Estimated operational cost (Default: €200). Used for ROI calculation. |
+| `u_est_monthly_cost` | Currency | Estimated operational cost (Default: $200). Used for ROI calculation. |
 
 ---
 
